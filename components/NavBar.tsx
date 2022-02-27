@@ -2,55 +2,25 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+const active = () =>
+  "flex items-center px-2 border-b-2 border-b-orange-500 h-14";
+
 const NavBar: NextPage = () => {
   const router = useRouter();
   return (
-    <nav>
-      <div>
-        <Link href="/movie">
-          <a className={router.pathname === "/movie" ? "active" : ""}>Movie</a>
-        </Link>
-        <Link href="/tv">
-          <a className={router.pathname === "/tv" ? "active" : ""}>Tv</a>
-        </Link>
-        <Link href="/search">
-          <a className={router.pathname === "/search" ? "active" : ""}>
-            Search
-          </a>
-        </Link>
-      </div>
-
-      <style jsx>{`
-        a {
-          text-decoration: none;
-        }
-        nav {
-          display: flex;
-          gap: 10px;
-          flex-direction: column;
-          align-items: center;
-          padding-top: 20px;
-          padding-bottom: 10px;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-        }
-        img {
-          max-width: 100px;
-          margin-bottom: 5px;
-        }
-        nav a {
-          font-weight: 600;
-          font-size: 18px;
-        }
-        .active {
-          color: tomato;
-        }
-        nav div {
-          display: flex;
-          gap: 10px;
-        }
-      `}</style>
-    </nav>
+    <header className="fixed top-0 left-0 w-full bg-slate-800 z-10">
+      <nav className="flex px-10 justify-start text-white text-sm items-center space-x-10 h-14">
+        <div className={router.pathname === "/movie" ? active() : ""}>
+          <Link href="/movie">Movies</Link>
+        </div>
+        <div className={router.pathname === "/tv" ? active() : ""}>
+          <Link href="/tv">Tv Shows</Link>
+        </div>
+        <div className={router.pathname === "/search" ? active() : ""}>
+          <Link href="/search">Search</Link>
+        </div>
+      </nav>
+    </header>
   );
 };
 
