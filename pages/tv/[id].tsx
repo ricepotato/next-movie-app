@@ -19,19 +19,10 @@ interface TvShow {
   production_companies: [{ logo_path: string; id: number }];
   production_countries: [{ name: string }];
   seasons: [TvShowSeason];
+  backdrop_path: string;
+  poster_path: string;
+  overview: string;
 }
-
-// iso_639_1: "en",
-// iso_3166_1: "US",
-// name: "Final Trailer",
-// key: "3Svs_hl897c",
-// site: "YouTube",
-// size: 1080,
-// type: "Trailer",
-// official: true,
-// published_at: "2021-10-31T15:00:01.000Z",
-// id: "617fcd72c7c224006566cca3"
-// },
 
 const TvDetail: NextPage = () => {
   const [tvShow, setTvShow] = useState<TvShow | null>(null);
@@ -51,28 +42,39 @@ const TvDetail: NextPage = () => {
   }, [id]);
 
   return (
-    <div>
-      <Seo title="Tv Detail"></Seo>
-      <h2>Tv Detail</h2>
+    <div className="relative pt-20 px-5 h-screen bg-slate-800">
+      <Seo title={tvShow ? tvShow.name : ""}></Seo>
       {tvShow !== null ? (
         <div>
-          <div></div>
-          <div>
-            <div></div>
-            <div>
-              <h2>{tvShow.name}</h2>
-              <div>
-                <span>{tvShow.first_air_date}</span>
-                <span>.</span>
-                <span></span>
-                <span>.</span>
-                <span>{tvShow.genres.map((genre) => genre.name)}</span>
+          <Image
+            alt={`https://image.tmdb.org/t/p/original/${tvShow?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/original/${tvShow?.backdrop_path}`}
+            layout="fill"
+            className="object-cover blur-sm opacity-50 pointer-events-none z-0"
+          ></Image>
+          <div className="h-[calc(100vh_-_100px)] w-full flex space-x-4">
+            <div className="relative h-full w-1/3">
+              <Image
+                alt={`https://image.tmdb.org/t/p/original${tvShow?.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original${tvShow?.poster_path}`}
+                layout="fill"
+                className="object-cover rounded-lg shadow-lg"
+              ></Image>
+            </div>
+            <div className="h-full w-2/3 z-20 text-white">
+              <h2 className="text-2xl font-semibold">{tvShow.name}</h2>
+              <div className="mt-2 text-sm flex space-x-2">
+                <span className="block">{tvShow.first_air_date}</span>
+                <span className="block">.</span>
+                <span className="block">
+                  {tvShow.genres.map((genre) => genre.name)}
+                </span>
               </div>
-              <p>description</p>
+              <p className="mt-5 text-sm">{tvShow.overview}</p>
               {tvShow.videos ? (
                 <div>
-                  <h3>video links</h3>
-                  <ul>
+                  <h3 className="mt-5 text-xl">YouTube links</h3>
+                  <ul className="mt-2 flex space-x-2">
                     {tvShow.videos?.results
                       .filter((item) => item.site == "YouTube")
                       .map((item, idx) => (
@@ -81,12 +83,14 @@ const TvDetail: NextPage = () => {
                           href={`https://www.youtube.com/watch?v=${item.key}`}
                           passHref={true}
                         >
-                          <Image
-                            alt={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
-                            src={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
-                            width={100}
-                            height={100}
-                          ></Image>
+                          <div className="relative h-40 w-40 cursor-pointer">
+                            <Image
+                              alt={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
+                              src={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
+                              layout="fill"
+                              className="object-cover"
+                            ></Image>
+                          </div>
                         </Link>
                       ))}
                   </ul>
@@ -94,22 +98,28 @@ const TvDetail: NextPage = () => {
               ) : null}
 
               <div>
-                <ul>
+                <h3 className="mt-5 text-xl">Productions</h3>
+                <ul className="flex mt-2 space-x-2">
                   {tvShow.production_companies.map((company) =>
                     company.logo_path !== null ? (
                       <li key={company.id}>
-                        <Image
-                          src={`https://image.tmdb.org/t/p/original${company.logo_path}`}
-                          alt={`https://image.tmdb.org/t/p/original${company.logo_path}`}
-                          width={100}
-                          height={100}
-                        ></Image>
+                        <div className="h-28 w-40 bg-gray-300 p-2 rounded-sm">
+                          <div className="relative w-full h-full">
+                            <Image
+                              src={`https://image.tmdb.org/t/p/original${company.logo_path}`}
+                              alt={`https://image.tmdb.org/t/p/original${company.logo_path}`}
+                              layout="fill"
+                              className="object-scale-down"
+                            ></Image>
+                          </div>
+                        </div>
                       </li>
                     ) : null
                   )}
                 </ul>
               </div>
               <div>
+                <h3 className="mt-5 text-xl">Countries</h3>
                 <ul>
                   {tvShow.production_countries.map((country, idx) => (
                     <li key={idx}>{country.name}</li>

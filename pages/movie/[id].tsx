@@ -40,7 +40,7 @@ const MovieDetail: NextPage = () => {
     <div className="relative pt-20 px-5 h-screen bg-slate-800">
       <Seo title={movie !== null ? movie.title : ""}></Seo>
       {movie !== null ? (
-        <div className="text-white">
+        <div className="">
           <Image
             alt={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
             src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
@@ -56,7 +56,7 @@ const MovieDetail: NextPage = () => {
                 className="object-cover rounded-lg shadow-lg"
               ></Image>
             </div>
-            <div className="h-full w-2/3 z-20">
+            <div className="h-full w-2/3 z-20 text-white">
               <div>
                 <h2 className="text-2xl font-semibold">{movie.title}</h2>
                 <div className="mt-2 text-sm flex space-x-2">
@@ -71,7 +71,7 @@ const MovieDetail: NextPage = () => {
                 <p className="mt-5 text-sm">{movie.overview}</p>
                 {movie.videos ? (
                   <div>
-                    <h3 className="mt-5 text-xl">Video links</h3>
+                    <h3 className="mt-5 text-xl">YouTube links</h3>
                     <ul className="mt-2 flex space-x-2">
                       {movie.videos?.results
                         .filter((video) => video.site == "YouTube")
