@@ -6,17 +6,12 @@ import { useEffect, useState } from "react";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
 interface Movie {
   title: string;
   release_date: string;
   runtime: number;
-  genres: [Genre];
-  videos: { results: [] };
+  genres: [{ id: number; name: string }];
+  videos: { results: [{ site: string; key: string }] };
   production_companies: [{ logo_path: string; id: number }];
   production_countries: [{ name: string }];
 }
@@ -40,7 +35,7 @@ const MovieDetail: NextPage = () => {
 
   return (
     <div>
-      <Seo title="Movie Detail"></Seo>
+      <Seo title={movie !== null ? movie.title : ""}></Seo>
 
       {movie !== null ? (
         <div>
@@ -61,20 +56,22 @@ const MovieDetail: NextPage = () => {
                 <div>
                   <h3>video links</h3>
                   <ul>
-                    {movie.videos?.results.map((video, idx) => (
-                      <Link
-                        key={idx}
-                        href={`https://www.youtube.com/watch?v=${video.key}`}
-                        passHref={true}
-                      >
-                        <Image
-                          alt={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
-                          src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
-                          width={100}
-                          height={100}
-                        ></Image>
-                      </Link>
-                    ))}
+                    {movie.videos?.results
+                      .filter((video) => video.site == "YouTube")
+                      .map((video, idx) => (
+                        <Link
+                          key={idx}
+                          href={`https://www.youtube.com/watch?v=${video.key}`}
+                          passHref={true}
+                        >
+                          <Image
+                            alt={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
+                            src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
+                            width={100}
+                            height={100}
+                          ></Image>
+                        </Link>
+                      ))}
                   </ul>
                 </div>
               ) : null}

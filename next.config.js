@@ -26,7 +26,7 @@ const nextConfig = {
       },
       {
         source: "/api/tv/:id",
-        destination: `${baseUrl}tv/:id?api_key=${API_KEY}`,
+        destination: `${baseUrl}tv/:id?api_key=${API_KEY}&language=en-US&append_to_response=videos`,
       },
       {
         source: "/api/movies",
@@ -34,7 +34,7 @@ const nextConfig = {
       },
       {
         source: "/api/movies/:id",
-        destination: `${baseUrl}movie/:id?api_key=${API_KEY}`,
+        destination: `${baseUrl}movie/:id?api_key=${API_KEY}&language=en-US&append_to_response=videos`,
       },
       {
         source: "/api/movies/now_playing",

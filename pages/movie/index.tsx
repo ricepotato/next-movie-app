@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
 import Poster, { PosterProps } from "../../components/Poster";
-import { useRouter } from "next/router";
 
 interface setMovieFunction {
   (results: any): void;
@@ -26,7 +26,7 @@ const Movie: NextPage = () => {
     getMovieTmpl(`/api/movies/now_playing`, setNowPlayingMovies);
 
   const getMovieTmpl = async (url: string, cb: setMovieFunction) => {
-    const response = await fetch(`/api/movies/upcoming`);
+    const response = await fetch(url);
     const { results } = await response.json();
     cb(results);
   };
