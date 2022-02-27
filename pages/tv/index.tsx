@@ -10,6 +10,7 @@ export interface TvShowProps {
   name: string;
   first_air_date: string;
   vote_average: number;
+  poster_path: string;
 }
 
 interface setTvShowFunction {
@@ -44,12 +45,12 @@ const Tv: NextPage = () => {
   }, []);
 
   return (
-    <div>
-      <Seo title="Tvs"></Seo>
+    <div className="pt-16 px-5 bg-slate-800 text-white">
+      <Seo title="Tv shows"></Seo>
       <div>
-        <h2>Top Rated Shows</h2>
+        <h2 className="py-2 font-semibold text-lg ">Top Rated Shows</h2>
         {!ratedShows && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {ratedShows?.map((tvShow: TvShowProps, idx) => (
             <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
               <Poster
@@ -57,15 +58,16 @@ const Tv: NextPage = () => {
                 title={tvShow.name}
                 release_date={tvShow.first_air_date}
                 vote_average={tvShow.vote_average}
+                poster_path={tvShow.poster_path}
               ></Poster>
             </div>
           ))}
         </div>
       </div>
       <div>
-        <h2>Popular Shows</h2>
+        <h2 className="py-2 font-semibold text-lg ">Popular Shows</h2>
         {!popularShows && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {popularShows?.map((tvShow: TvShowProps, idx) => (
             <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
               <Poster
@@ -79,9 +81,9 @@ const Tv: NextPage = () => {
         </div>
       </div>
       <div>
-        <h2>Airing Tody Shows</h2>
+        <h2 className="py-2 font-semibold text-lg ">Airing Tody Shows</h2>
         {!airingShows && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {airingShows?.map((tvShow: TvShowProps, idx) => (
             <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
               <Poster
