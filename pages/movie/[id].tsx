@@ -83,7 +83,7 @@ const MovieDetail: NextPage = () => {
                             href={`https://www.youtube.com/watch?v=${video.key}`}
                             passHref={true}
                           >
-                            <div className="relative w-full h-40 cursor-pointer">
+                            <div className="relative w-full h-64 cursor-pointer">
                               <Image
                                 alt={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
@@ -99,7 +99,7 @@ const MovieDetail: NextPage = () => {
 
                 <div>
                   <h3 className="mt-5 text-xl">Productions</h3>
-                  <ul className="flex mt-2 space-x-2">
+                  <ul className="mt-2 grid gap-4 grid-cols-4 md:grid-cols-5">
                     {movie.production_companies.map((company) =>
                       company.logo_path !== null ? (
                         <li key={company.id}>
