@@ -5,7 +5,7 @@ const Layout: NextPage = ({ children }) => {
   return (
     <div>
       <NavBar></NavBar>
-      <div>{children}</div>
+      <div className="h-screen">{children}</div>
     </div>
   );
 };
