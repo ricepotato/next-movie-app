@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export interface PosterProps {
@@ -6,6 +7,7 @@ export interface PosterProps {
   title: string;
   release_date: string;
   vote_average: number;
+  poster_path: string;
 }
 
 const Poster: NextPage<PosterProps> = ({
@@ -13,19 +15,31 @@ const Poster: NextPage<PosterProps> = ({
   title,
   release_date,
   vote_average,
+  poster_path,
 }) => {
   return (
     <Link href={`/movie/${id}`} passHref={true}>
-      <div>
+      <a>
         <div>
-          <div></div>
-          <span>
-            <span>⭐️</span> {vote_average}/10
-          </span>
+          <div className="relative w-full h-72">
+            <Image
+              className="rounded-md object-cover shadow-lg"
+              alt={`https://image.tmdb.org/t/p/w300${poster_path}`}
+              src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+              layout="fill"
+            ></Image>
+          </div>
+          <div className="mt-2 flex justify-between">
+            <div>
+              <span className="block text-sm font-semibold">{title}</span>
+              <span className="block text-xs text-gray-300">
+                {release_date}
+              </span>
+            </div>
+            <span className="text-sm">⭐️{vote_average}/10</span>
+          </div>
         </div>
-        <span>{title}</span>
-        <span>{release_date}</span>
-      </div>
+      </a>
     </Link>
   );
 };

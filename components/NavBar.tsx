@@ -8,8 +8,8 @@ const active = () =>
 const NavBar: NextPage = () => {
   const router = useRouter();
   return (
-    <header className="fixed top-0 left-0 w-full bg-slate-800 z-10">
-      <nav className="flex px-10 justify-start text-white text-sm items-center space-x-10 h-14">
+    <header className="fixed top-0 left-0 w-full bg-slate-800 z-10 shadow-lg opacity-90">
+      <nav className="flex px-10 justify-start text-white text-sm items-center space-x-10 h-14 font-semibold">
         <div className={router.pathname === "/movie" ? active() : ""}>
           <Link href="/movie">Movies</Link>
         </div>

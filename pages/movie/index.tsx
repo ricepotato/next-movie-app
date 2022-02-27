@@ -37,12 +37,12 @@ const Movie: NextPage = () => {
     getNowPlayingMovies();
   }, []);
   return (
-    <div>
+    <div className="pt-16 px-5 bg-slate-800 text-white">
       <Seo title="Movies"></Seo>
       <div>
-        <h2>Upcomming Movies</h2>
+        <h2 className="py-2 font-semibold text-lg ">Upcomming Movies</h2>
         {!upcommingMovies && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {upcommingMovies?.map((movie: PosterProps, idx) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
@@ -50,6 +50,7 @@ const Movie: NextPage = () => {
                 title={movie.title}
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
+                poster_path={movie.poster_path}
               ></Poster>
             </div>
           ))}
@@ -58,7 +59,7 @@ const Movie: NextPage = () => {
       <div>
         <h2>Now Playing</h2>
         {!nowPlayingMovies && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {nowPlayingMovies?.map((movie: PosterProps, idx) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
@@ -66,6 +67,7 @@ const Movie: NextPage = () => {
                 title={movie.title}
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
+                poster_path={movie.poster_path}
               ></Poster>
             </div>
           ))}
@@ -74,7 +76,7 @@ const Movie: NextPage = () => {
       <div>
         <h2>Popular Movies</h2>
         {!popularMovies && <Loading></Loading>}
-        <div>
+        <div className="grid grid-cols-2 gap-5">
           {popularMovies?.map((movie: PosterProps, idx) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
@@ -82,6 +84,7 @@ const Movie: NextPage = () => {
                 title={movie.title}
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
+                poster_path={movie.poster_path}
               ></Poster>
             </div>
           ))}
