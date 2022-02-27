@@ -26,7 +26,7 @@ interface TvShow {
 
 const TvDetail: NextPage = () => {
   const [tvShow, setTvShow] = useState<TvShow | null>(null);
-  const getTvShowDetail = async (id: string) => {
+  const getTvShowDetail = async (id: string | string[]) => {
     const response = await fetch(`/api/tv/${id}`);
     const results = await response.json();
     setTvShow(results);

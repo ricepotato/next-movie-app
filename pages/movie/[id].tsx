@@ -21,7 +21,7 @@ interface Movie {
 
 const MovieDetail: NextPage = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
-  const getMovieDetail = async (id: string) => {
+  const getMovieDetail = async (id: string | string[]) => {
     const response = await fetch(`/api/movies/${id}`);
     const results = await response.json();
     setMovie(results);
