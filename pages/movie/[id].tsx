@@ -37,18 +37,20 @@ const MovieDetail: NextPage = () => {
   }, [id]);
 
   return (
-    <div className="relative pt-20 px-5 h-screen bg-slate-800">
+    <div className="h-screen bg-slate-800">
+      <div className="w-full h-full relative">
+        <Image
+          alt={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+          layout="fill"
+          className="object-cover blur-sm opacity-50 pointer-events-none z-0"
+        ></Image>
+      </div>
       <Seo title={movie !== null ? movie.title : ""}></Seo>
       {movie !== null ? (
-        <div className="">
-          <Image
-            alt={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-            src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-            layout="fill"
-            className="object-cover blur-sm opacity-50 pointer-events-none z-0"
-          ></Image>
-          <div className="h-[calc(100vh_-_100px)] w-full flex space-x-4">
-            <div className="relative h-full w-1/3">
+        <div className="absolute top-0 left-0 w-full px-5 pt-16 overflow-y-scroll">
+          <div className="h-[calc(100vh_-_100px)] md:w-full block md:space-x-4 md:flex">
+            <div className="relative h-64 md:h-full md:w-1/3">
               <Image
                 alt={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
                 src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
@@ -56,7 +58,7 @@ const MovieDetail: NextPage = () => {
                 className="object-cover rounded-lg shadow-lg"
               ></Image>
             </div>
-            <div className="h-full w-2/3 z-20 text-white">
+            <div className="h-full md:w-2/3 z-5 text-white">
               <div>
                 <h2 className="text-2xl font-semibold">{movie.title}</h2>
                 <div className="mt-2 text-sm flex space-x-2">
@@ -72,7 +74,7 @@ const MovieDetail: NextPage = () => {
                 {movie.videos ? (
                   <div>
                     <h3 className="mt-5 text-xl">YouTube links</h3>
-                    <ul className="mt-2 flex space-x-2">
+                    <ul className="mt-2 grid gap-4 grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
                       {movie.videos?.results
                         .filter((video) => video.site == "YouTube")
                         .map((video, idx) => (
@@ -81,12 +83,12 @@ const MovieDetail: NextPage = () => {
                             href={`https://www.youtube.com/watch?v=${video.key}`}
                             passHref={true}
                           >
-                            <div className="relative h-40 w-40 cursor-pointer">
+                            <div className="relative w-full h-40 cursor-pointer">
                               <Image
                                 alt={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 layout="fill"
-                                className="object-cover"
+                                className="object-cover rounded-lg"
                               ></Image>
                             </div>
                           </Link>
