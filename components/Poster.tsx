@@ -1,24 +1,32 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 
-interface Props {
+export interface PosterProps {
+  id: number;
   title: string;
-  year: string;
+  release_date: string;
+  vote_average: number;
 }
 
-const Poster: NextPage<Props> = ({ title, year }) => {
+const Poster: NextPage<PosterProps> = ({
+  id,
+  title,
+  release_date,
+  vote_average,
+}) => {
   return (
-    <a>
+    <Link href={`/movie/${id}`} passHref={true}>
       <div>
         <div>
           <div></div>
           <span>
-            <span>⭐️</span> 8.2/10
+            <span>⭐️</span> {vote_average}/10
           </span>
         </div>
-        <span>Sing 2</span>
-        <span>2021</span>
+        <span>{title}</span>
+        <span>{release_date}</span>
       </div>
-    </a>
+    </Link>
   );
 };
 

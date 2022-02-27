@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const API_KEY = process.env.API_KEY;
 const baseUrl = "https://api.themoviedb.org/3/";
+
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['img.youtube.com', 'image.tmdb.org'],
+  },
   async redirects() {
     return [];
   },
