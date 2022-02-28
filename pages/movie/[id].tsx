@@ -89,6 +89,8 @@ const MovieDetail: NextPage = () => {
                                 src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 layout="fill"
                                 className="object-cover rounded-lg"
+                                placeholder="blur"
+                                blurDataURL="/assets/image-blur-placeholder.png"
                               ></Image>
                             </div>
                           </Link>

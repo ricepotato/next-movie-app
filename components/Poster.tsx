@@ -18,29 +18,23 @@ const Poster: NextPage<PosterProps> = ({
   poster_path,
 }) => {
   return (
-    <Link href={`/movie/${id}`} passHref={true}>
-      <a>
+    <div className="cursor-pointer">
+      <div className="relative w-full h-72">
+        <Image
+          className="rounded-md object-cover shadow-lg"
+          alt={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          layout="fill"
+        ></Image>
+      </div>
+      <div className="mt-2 flex justify-between">
         <div>
-          <div className="relative w-full h-72">
-            <Image
-              className="rounded-md object-cover shadow-lg"
-              alt={`https://image.tmdb.org/t/p/w300${poster_path}`}
-              src={`https://image.tmdb.org/t/p/w300${poster_path}`}
-              layout="fill"
-            ></Image>
-          </div>
-          <div className="mt-2 flex justify-between">
-            <div>
-              <span className="block text-sm font-semibold">{title}</span>
-              <span className="block text-xs text-gray-300">
-                {release_date}
-              </span>
-            </div>
-            <span className="text-sm">⭐️{vote_average}/10</span>
-          </div>
+          <span className="block text-sm font-semibold">{title}</span>
+          <span className="block text-xs text-gray-300">{release_date}</span>
         </div>
-      </a>
-    </Link>
+        <span className="text-sm">⭐️{vote_average}/10</span>
+      </div>
+    </div>
   );
 };
 

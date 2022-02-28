@@ -87,6 +87,8 @@ const TvDetail: NextPage = () => {
                           src={`https://image.tmdb.org/t/p/w300${season.poster_path}`}
                           layout="fill"
                           className="object-cover"
+                          placeholder="blur"
+                          blurDataURL="/assets/image-blur-placeholder.png"
                         ></Image>
                       </div>
                     </div>
@@ -111,6 +113,8 @@ const TvDetail: NextPage = () => {
                               src={`https://img.youtube.com/vi/${item.key}/hqdefault.jpg`}
                               layout="fill"
                               className="object-cover"
+                              placeholder="blur"
+                              blurDataURL="/assets/image-blur-placeholder.png"
                             ></Image>
                           </div>
                         </Link>
