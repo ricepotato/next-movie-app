@@ -74,7 +74,7 @@ const MovieDetail: NextPage = () => {
                 {movie.videos ? (
                   <div>
                     <h3 className="mt-5 text-xl">YouTube links</h3>
-                    <ul className="mt-2 grid gap-4 grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
+                    <ul className="mt-2 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
                       {movie.videos?.results
                         .filter((video) => video.site == "YouTube")
                         .map((video, idx) => (
@@ -83,12 +83,12 @@ const MovieDetail: NextPage = () => {
                             href={`https://www.youtube.com/watch?v=${video.key}`}
                             passHref={true}
                           >
-                            <div className="relative w-full h-64 cursor-pointer">
+                            <div className="relative w-full h-32 cursor-pointer">
                               <Image
                                 alt={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                                 layout="fill"
-                                className="object-cover rounded-lg"
+                                className="object-cover md:object-scale-down rounded-lg"
                                 placeholder="blur"
                                 blurDataURL="/assets/image-blur-placeholder.png"
                               ></Image>
@@ -101,7 +101,7 @@ const MovieDetail: NextPage = () => {
 
                 <div>
                   <h3 className="mt-5 text-xl">Productions</h3>
-                  <ul className="mt-2 grid gap-4 grid-cols-4 md:grid-cols-5">
+                  <ul className="mt-2 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {movie.production_companies.map((company) =>
                       company.logo_path !== null ? (
                         <li key={company.id}>
