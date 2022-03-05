@@ -1,6 +1,6 @@
 # Next Movie App 😀
 
-https://movie-app-342615.uc.r.appspot.com/movie 👈 click here to check this app
+https://next-movie-app-olive.vercel.app/movie/ 👈 click here to check this app
 
 ## React CSR App
 
