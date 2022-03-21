@@ -1,21 +1,25 @@
 import useSWR from "swr";
-import Poster, { PosterProps } from "../components/Poster";
 
-type MovieCategory = "upcoming" | "popular" | "now_playing";
+type TvCategory = "top_rated" | "popular" | "airing_today";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-interface UseMovieResult {
-  results: PosterProps[];
+export interface TvShowProps {
+  id: number;
+  name: string;
+  first_air_date: string;
+  vote_average: number;
+  poster_path: string;
 }
 
-export default function useMovie(category: MovieCategory) {
-  const { data, error } = useSWR<UseMovieResult>(
-    `/api/movies/${category}`,
-    fetcher
-  );
+interface UseTvResult {
+  results: TvShowProps[];
+}
+
+export function useTv(category: TvCategory) {
+  const { data, error } = useSWR<UseTvResult>(`/api/tv/${category}`, fetcher);
   return {
-    movies: data?.results,
+    tvShows: data?.results,
     isLoading: !error && !data,
     isError: error,
   };
