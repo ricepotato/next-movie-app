@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Seo from "../../components/Seo";
-import Loading from "../../components/Loading";
-import { useMovieDetail, MovieDetail } from "../../lib/useMovie";
+import Seo from "@components/Seo";
+import Loading from "@components/Loading";
+import { useMovieDetail, MovieDetail } from "@libs/useMovie";
 
 const MovieDetail: NextPage = () => {
   const router = useRouter();

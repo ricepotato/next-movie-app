@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import Loading from "../../components/Loading";
-import Seo from "../../components/Seo";
-import Poster from "../../components/Poster";
-import { useTv } from "../../lib/useTv";
+import Loading from "@components/Loading";
+import Seo from "@components/Seo";
+import Poster from "@components/Poster";
+import { useTv } from "@libs/useTv";
 
 const Tv: NextPage = () => {
   const {
