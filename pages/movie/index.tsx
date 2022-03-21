@@ -4,46 +4,39 @@ import { useRouter } from "next/router";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
 import Poster, { PosterProps } from "../../components/Poster";
-
-interface setMovieFunction {
-  (results: any): void;
-}
+import useMovie from "../../lib/useMovie";
 
 const Movie: NextPage = () => {
-  const [upcommingMovies, setUpcommiongMovies] = useState([]);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
-  const [popularMovies, setPopularMovies] = useState([]);
   const router = useRouter();
   const onPosterClick = (id: number) => {
     router.push(`/movie/${id}`);
   };
 
-  const getUpcomingMovies = () =>
-    getMovieTmpl(`/api/movies/upcoming`, setUpcommiongMovies);
-  const getPopularMovies = () =>
-    getMovieTmpl(`/api/movies/popular`, setPopularMovies);
-  const getNowPlayingMovies = () =>
-    getMovieTmpl(`/api/movies/now_playing`, setNowPlayingMovies);
+  const {
+    movies: upcomingMovies,
+    isLoading: isUpcomingLoading,
+    isError: isUpcomingError,
+  } = useMovie("upcoming");
+  const {
+    movies: nowPlayingMovies,
+    isLoading: isNowPlayingLoading,
+    isError: isNowPlayingError,
+  } = useMovie("now_playing");
 
-  const getMovieTmpl = async (url: string, cb: setMovieFunction) => {
-    const response = await fetch(url);
-    const { results } = await response.json();
-    cb(results);
-  };
+  const {
+    movies: popularMovies,
+    isLoading: isPopularLoading,
+    isError: isPopularError,
+  } = useMovie("popular");
 
-  useEffect(() => {
-    getUpcomingMovies();
-    getPopularMovies();
-    getNowPlayingMovies();
-  }, []);
   return (
     <div className="pt-16 px-5 bg-slate-800 text-white">
       <Seo title="Movies"></Seo>
       <div>
         <h2 className="py-2 font-semibold text-2xl ">😃 Upcoming Movies</h2>
-        {!upcommingMovies && <Loading></Loading>}
+        {isUpcomingLoading && <Loading></Loading>}
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {upcommingMovies?.map((movie: PosterProps, idx) => (
+          {upcomingMovies?.map((movie: PosterProps) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
                 id={movie.id}
@@ -58,9 +51,9 @@ const Movie: NextPage = () => {
       </div>
       <div>
         <h2 className="py-2 mt-5 font-semibold text-2xl">😊 Now Playing</h2>
-        {!nowPlayingMovies && <Loading></Loading>}
+        {!isNowPlayingLoading && <Loading></Loading>}
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {nowPlayingMovies?.map((movie: PosterProps, idx) => (
+          {nowPlayingMovies?.map((movie: PosterProps) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
                 id={movie.id}
@@ -75,9 +68,9 @@ const Movie: NextPage = () => {
       </div>
       <div>
         <h2 className="py-2 mt-5 font-semibold text-2xl">😍 Popular Movies</h2>
-        {!popularMovies && <Loading></Loading>}
+        {!isPopularLoading && <Loading></Loading>}
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {popularMovies?.map((movie: PosterProps, idx) => (
+          {popularMovies?.map((movie: PosterProps) => (
             <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
               <Poster
                 id={movie.id}
