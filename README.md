@@ -45,73 +45,73 @@ make deploy
 #### Get upcoming movies
 
 ```http
-  GET /api/movies/upcoming
+GET /api/movies/upcoming
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/movies/upcoming
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/movies/upcoming
 
 #### Get now_playing movies
 
 ```http
-  GET /api/movies/now_playing
+GET /api/movies/now_playing
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/movies/now_playing
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/movies/now_playing
 
 #### Get popular movies
 
 ```http
-  GET /api/movies/popular
+GET /api/movies/popular
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/movies/popular
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/movies/popular
 
 #### Get movie by movie ID
 
 ```http
-  GET /api/movies/:id
+GET /api/movies/:id
 ```
 
 | Parameter | Type     | Description                             |
 | :-------- | :------- | :-------------------------------------- |
 | `id`      | `string` | **Required**. Id of movie item to fetch |
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/movies/634649
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/movies/634649
 
 ### TV Shows API
 
 #### Get top raated tv shows
 
 ```http
-  GET /api/tv/top_rated
+GET /api/tv/top_rated
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/tv/top_rated
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/tv/top_rated
 
 #### Get top popular tv shows
 
 ```http
-  GET /api/tv/popular
+GET /api/tv/popular
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/tv/popular
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/tv/popular
 
 #### Get top airing_today tv shows
 
 ```http
-  GET /api/tv/airing_today
+GET /api/tv/airing_today
 ```
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/tv/airing_today
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/tv/airing_today
 
 #### Get tv show by ID
 
 ```http
-  GET /api/tv/:id
+GET /api/tv/:id
 ```
 
 | Parameter | Type     | Description                               |
 | :-------- | :------- | :---------------------------------------- |
 | `id`      | `string` | **Required**. Id of TV show item to fetch |
 
-ex) https://movie-app-342615.uc.r.appspot.com/api/tv/85552
+ex) https://next-movie-app-3g4wnad4e-ricepotato.vercel.app/api/tv/85552
