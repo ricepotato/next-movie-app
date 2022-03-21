@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Loading from "../../components/Loading";
 import Seo from "../../components/Seo";
 import Poster from "../../components/Poster";
-import { useTv, TvShowProps } from "../../lib/useTv";
+import { useTv } from "../../lib/useTv";
 
 const Tv: NextPage = () => {
   const {
@@ -53,7 +53,7 @@ const Tv: NextPage = () => {
         <h2 className="py-2 mt-5 font-semibold text-2xl">😍 Popular Shows</h2>
         {isPopularShowsLoading && <Loading></Loading>}
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {popularShows?.map((tvShow: TvShowProps, idx) => (
+          {popularShows?.map((tvShow, idx) => (
             <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
               <Poster
                 id={tvShow.id}
@@ -72,7 +72,7 @@ const Tv: NextPage = () => {
         </h2>
         {isAiringShowsLoading && <Loading></Loading>}
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {airingShows?.map((tvShow: TvShowProps, idx) => (
+          {airingShows?.map((tvShow, idx) => (
             <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
               <Poster
                 id={tvShow.id}

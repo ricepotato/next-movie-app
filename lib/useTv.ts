@@ -1,3 +1,4 @@
+import { isLocalURL } from "next/dist/shared/lib/router/router";
 import useSWR from "swr";
 
 type TvCategory = "top_rated" | "popular" | "airing_today";
@@ -16,10 +17,45 @@ interface UseTvResult {
   results: TvShowProps[];
 }
 
+interface TvShowSeason {
+  name: string;
+  poster_path: string;
+}
+
+interface TvShowDetail {
+  name: string;
+  first_air_date: string;
+  genres: [{ id: number; name: string }];
+  videos: { results: [{ site: string; key: string }] };
+  production_companies: [{ logo_path: string; id: number }];
+  production_countries: [{ name: string }];
+  seasons: [TvShowSeason];
+  backdrop_path: string;
+  poster_path: string;
+  overview: string;
+}
+
 export function useTv(category: TvCategory) {
   const { data, error } = useSWR<UseTvResult>(`/api/tv/${category}`, fetcher);
   return {
     tvShows: data?.results,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+
+export function useTvDetail(id: string | string[] | undefined) {
+  if (id === undefined) {
+    return {
+      tvShow: undefined,
+      isLoading: true,
+      isError: false,
+    };
+  }
+
+  const { data, error } = useSWR<TvShowDetail>(`/api/tv/${id}`, fetcher);
+  return {
+    tvShow: data,
     isLoading: !error && !data,
     isError: error,
   };

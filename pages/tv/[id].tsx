@@ -2,44 +2,14 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
-
-interface TvShowSeason {
-  name: string;
-  poster_path: string;
-}
-
-interface TvShow {
-  name: string;
-  first_air_date: string;
-  genres: [{ id: number; name: string }];
-  videos: { results: [{ site: string; key: string }] };
-  production_companies: [{ logo_path: string; id: number }];
-  production_countries: [{ name: string }];
-  seasons: [TvShowSeason];
-  backdrop_path: string;
-  poster_path: string;
-  overview: string;
-}
+import { useTvDetail } from "../../lib/useTv";
 
 const TvDetail: NextPage = () => {
-  const [tvShow, setTvShow] = useState<TvShow | null>(null);
-  const getTvShowDetail = async (id: string | string[]) => {
-    const response = await fetch(`/api/tv/${id}`);
-    const results = await response.json();
-    setTvShow(results);
-  };
-
   const router = useRouter();
   const { id } = router.query;
-
-  useEffect(() => {
-    if (id !== undefined) {
-      getTvShowDetail(id);
-    }
-  }, [id]);
+  const { tvShow, isLoading, isError } = useTvDetail(id);
 
   return (
     <div className="h-screen bg-slate-800">
@@ -52,7 +22,7 @@ const TvDetail: NextPage = () => {
         ></Image>
       </div>
       <Seo title={tvShow ? tvShow.name : ""}></Seo>
-      {tvShow !== null ? (
+      {tvShow !== undefined ? (
         <div className="absolute top-0 left-0 w-full px-5 pt-16 overflow-y-scroll">
           <div className="h-[calc(100vh_-_100px)] md:w-full block md:space-x-4 md:flex">
             <div className="relative h-64 md:h-full md:w-1/3">
