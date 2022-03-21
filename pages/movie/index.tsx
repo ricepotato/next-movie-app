@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
 import Poster, { PosterProps } from "../../components/Poster";
-import useMovie from "../../lib/useMovie";
+import { useMovie } from "../../lib/useMovie";
 
 const Movie: NextPage = () => {
   const router = useRouter();

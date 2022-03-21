@@ -5,36 +5,12 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Seo from "../../components/Seo";
 import Loading from "../../components/Loading";
-
-interface Movie {
-  title: string;
-  release_date: string;
-  runtime: number;
-  overview: string;
-  genres: [{ id: number; name: string }];
-  videos: { results: [{ site: string; key: string }] };
-  production_companies: [{ logo_path: string; id: number }];
-  production_countries: [{ name: string }];
-  backdrop_path: string;
-  poster_path: string;
-}
+import { useMovieDetail, MovieDetail } from "../../lib/useMovie";
 
 const MovieDetail: NextPage = () => {
-  const [movie, setMovie] = useState<Movie | null>(null);
-  const getMovieDetail = async (id: string | string[]) => {
-    const response = await fetch(`/api/movies/${id}`);
-    const results = await response.json();
-    setMovie(results);
-  };
-
   const router = useRouter();
   const { id } = router.query;
-
-  useEffect(() => {
-    if (id !== undefined) {
-      getMovieDetail(id);
-    }
-  }, [id]);
+  const { movie, isLoading, isError } = useMovieDetail(id);
 
   return (
     <div className="h-screen bg-slate-800">
@@ -46,8 +22,8 @@ const MovieDetail: NextPage = () => {
           className="object-cover blur-sm opacity-50 pointer-events-none z-0"
         ></Image>
       </div>
-      <Seo title={movie !== null ? movie.title : ""}></Seo>
-      {movie !== null ? (
+      <Seo title={movie !== undefined ? movie.title : ""}></Seo>
+      {movie !== undefined ? (
         <div className="absolute top-0 left-0 w-full px-5 pt-16 overflow-y-scroll">
           <div className="h-[calc(100vh_-_100px)] md:w-full block md:space-x-4 md:flex">
             <div className="relative h-64 md:h-full md:w-1/3">
