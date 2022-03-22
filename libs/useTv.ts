@@ -1,4 +1,3 @@
-import { isLocalURL } from "next/dist/shared/lib/router/router";
 import useSWR from "swr";
 
 type TvCategory = "top_rated" | "popular" | "airing_today";
@@ -13,7 +12,7 @@ export interface TvShowProps {
   poster_path: string;
 }
 
-interface UseTvResult {
+export interface UseTvResult {
   results: TvShowProps[];
 }
 

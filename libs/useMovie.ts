@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import Poster, { PosterProps } from "../components/Poster";
+import Poster, { PosterProps } from "@components/Poster";
 
 type MovieCategory = "upcoming" | "popular" | "now_playing";
 

@@ -5,7 +5,7 @@ const baseUrl = "https://api.themoviedb.org/3/";
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['img.youtube.com', 'image.tmdb.org'],
+    domains: ["img.youtube.com", "image.tmdb.org"],
   },
   async redirects() {
     return [];
@@ -48,8 +48,16 @@ const nextConfig = {
         source: "/api/movies/popular",
         destination: `${baseUrl}movie/popular?api_key=${API_KEY}`,
       },
+      {
+        source: "/api/search/movie/:query",
+        destination: `${baseUrl}search/movie?api_key=${API_KEY}&query=:query`,
+      },
+      {
+        source: "/api/search/tv/:query",
+        destination: `${baseUrl}search/tv?api_key=${API_KEY}&query=:query`,
+      },
     ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
