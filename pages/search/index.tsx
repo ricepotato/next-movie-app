@@ -29,8 +29,11 @@ const Search: NextPage = () => {
   } = useMovieSearch(query);
 
   const router = useRouter();
-  const onPosterClick = (id: number) => {
+  const onMoviePosterClick = (id: number) => {
     router.push(`/movie/${id}`);
+  };
+  const onTvSohwPosterClick = (id: number) => {
+    router.push(`/tv/${id}`);
   };
 
   return (
@@ -52,7 +55,7 @@ const Search: NextPage = () => {
           <h3 className="mt-4 mb-2 text-2xl">Movie Results</h3>
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
             {movieData?.map((movie) => (
-              <div key={movie.id} onClick={() => onPosterClick(movie.id)}>
+              <div key={movie.id} onClick={() => onMoviePosterClick(movie.id)}>
                 <Poster
                   id={movie.id}
                   title={movie.title}
@@ -71,7 +74,10 @@ const Search: NextPage = () => {
           <h3 className="mt-4 mb-2 text-2xl">Tv Shows Results</h3>
           <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
             {tvData?.map((tvShow) => (
-              <div key={tvShow.id} onClick={() => onPosterClick(tvShow.id)}>
+              <div
+                key={tvShow.id}
+                onClick={() => onTvSohwPosterClick(tvShow.id)}
+              >
                 <Poster
                   id={tvShow.id}
                   title={tvShow.name}
