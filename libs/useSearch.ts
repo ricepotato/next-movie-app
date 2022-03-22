@@ -1,8 +1,23 @@
 import useSWR from "swr";
+import { TvShowProps } from "./useTv";
+import { PosterProps } from "@components/Poster";
 
-function useSearchTemplate<T = any>(url: string, query: string | undefined) {
+interface SearchResult {
+  isLoading: boolean;
+  isError: boolean;
+}
+
+interface UseTvSearchResult extends SearchResult {
+  data: TvShowProps[];
+}
+
+interface UseMovieSearchResult extends SearchResult {
+  data: PosterProps[];
+}
+
+function useSearchTemplate(url: string, query: string | undefined) {
   const key = query === "" || query === undefined ? null : `${url}/${query}`;
-  const { data, error } = useSWR<T>(key, (url: string) =>
+  const { data, error } = useSWR(key, (url: string) =>
     fetch(url).then((res) => res.json())
   );
   return {
@@ -12,7 +27,8 @@ function useSearchTemplate<T = any>(url: string, query: string | undefined) {
   };
 }
 
-export const useTvSearch = <UseTvResult>(query: string | undefined) =>
+export const useTvSearch = (query: string | undefined): UseTvSearchResult =>
   useSearchTemplate("/api/search/tv", query);
-export const useMovieSearch = <UseMovieResult>(query: string | undefined) =>
-  useSearchTemplate("/api/search/movie", query);
+export const useMovieSearch = (
+  query: string | undefined
+): UseMovieSearchResult => useSearchTemplate("/api/search/movie", query);
