@@ -44,15 +44,10 @@ export function useTv(category: TvCategory) {
 }
 
 export function useTvDetail(id: string | string[] | undefined) {
-  if (id === undefined) {
-    return {
-      tvShow: undefined,
-      isLoading: true,
-      isError: false,
-    };
-  }
-
-  const { data, error } = useSWR<TvShowDetail>(`/api/tv/${id}`, fetcher);
+  const { data, error } = useSWR<TvShowDetail>(
+    id === undefined ? null : `/api/tv/${id}`,
+    fetcher
+  );
   return {
     tvShow: data,
     isLoading: !error && !data,

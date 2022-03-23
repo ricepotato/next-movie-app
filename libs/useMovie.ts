@@ -35,16 +35,8 @@ export function useMovie(category: MovieCategory) {
 }
 
 export function useMovieDetail(movieId: string | string[] | undefined) {
-  if (movieId === undefined) {
-    return {
-      movie: undefined,
-      isLoading: true,
-      isError: false,
-    };
-  }
-
   const { data, error } = useSWR<MovieDetail>(
-    `/api/movies/${movieId}`,
+    movieId === undefined ? null : `/api/movies/${movieId}`,
     fetcher
   );
   return {
