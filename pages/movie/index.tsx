@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Seo from "@components/Seo";
 import { useMovie } from "@libs/useMovie";
-import PosterList from "@components/PosterList";
+import MoviePosterList from "@components/MoviePosterList";
 
 const Movie: NextPage = () => {
   const {
@@ -24,21 +24,21 @@ const Movie: NextPage = () => {
   return (
     <div className="pt-16 pb-5 px-5 bg-slate-800 text-white">
       <Seo title="Movies"></Seo>
-      <PosterList
+      <MoviePosterList
         title={"😃 Upcoming Movies"}
         isLoading={isUpcomingLoading}
         posters={upcomingMovies}
-      ></PosterList>
-      <PosterList
+      />
+      <MoviePosterList
         title={"😊 Now Playing"}
         isLoading={isNowPlayingLoading}
         posters={nowPlayingMovies}
-      ></PosterList>
-      <PosterList
+      />
+      <MoviePosterList
         title={"😍 Popular Movies"}
         isLoading={isPopularLoading}
         posters={popularMovies}
-      ></PosterList>
+      />
     </div>
   );
 };

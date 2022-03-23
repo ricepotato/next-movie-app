@@ -2,13 +2,17 @@ import { useRouter } from "next/router";
 import Poster, { PosterProps } from "@components/Poster";
 import Loading from "@components/Loading";
 
-interface PosterListProps {
+interface MoviePosterListProps {
   title: string;
   isLoading: boolean;
   posters: PosterProps[] | undefined;
 }
 
-const PosterList = ({ title, isLoading, posters }: PosterListProps) => {
+const MoviePosterList = ({
+  title,
+  isLoading,
+  posters,
+}: MoviePosterListProps) => {
   const router = useRouter();
   const onPosterClick = (id: number) => {
     router.push(`/movie/${id}`);
@@ -50,4 +54,4 @@ const PosterList = ({ title, isLoading, posters }: PosterListProps) => {
     </div>
   );
 };
-export default PosterList;
+export default MoviePosterList;
