@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
 
 export interface PosterProps {
   id: number;
@@ -17,13 +17,19 @@ const Poster: NextPage<PosterProps> = ({
   vote_average,
   poster_path,
 }) => {
+  const [src, setSrc] = useState(
+    `https://image.tmdb.org/t/p/w300${poster_path}`
+  );
   return (
     <div className="cursor-pointer">
       <div className="relative w-full h-72">
         <Image
           className="rounded-md object-cover shadow-lg"
-          alt={`https://image.tmdb.org/t/p/w300${poster_path}`}
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          alt={src}
+          src={src}
+          placeholder="blur"
+          blurDataURL="image-blur-placeholder.png"
+          onError={() => setSrc("/image-blur-placeholder.png")}
           layout="fill"
         ></Image>
       </div>

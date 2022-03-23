@@ -31,6 +31,8 @@ const TvDetail: NextPage = () => {
                 src={`https://image.tmdb.org/t/p/original${tvShow?.poster_path}`}
                 layout="fill"
                 className="object-cover rounded-lg shadow-lg"
+                placeholder="blur"
+                blurDataURL="/image-blur-placeholder.png"
               ></Image>
             </div>
             <div className="h-full md:w-2/3 z-20 text-white">
@@ -58,7 +60,7 @@ const TvDetail: NextPage = () => {
                           layout="fill"
                           className="object-cover"
                           placeholder="blur"
-                          blurDataURL="/assets/image-blur-placeholder.png"
+                          blurDataURL="/image-blur-placeholder.png"
                         ></Image>
                       </div>
                     </div>
@@ -84,7 +86,7 @@ const TvDetail: NextPage = () => {
                               layout="fill"
                               className="object-cover md:object-scale-down rounded-lg"
                               placeholder="blur"
-                              blurDataURL="/assets/image-blur-placeholder.png"
+                              blurDataURL="/image-blur-placeholder.png"
                             ></Image>
                           </div>
                         </Link>
